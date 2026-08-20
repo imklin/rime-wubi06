@@ -1,0 +1,92 @@
+patch:
+  # 输入法切换列表
+  schema_list:
+#    - schema: keke_wubi_86
+#    - schema: keke_wubi_98
+    - schema: keke_wubi_nc
+
+  # 菜单与界面
+  menu:
+    page_size: 8		#设置每页候选显示的词条数量,可设 1~10,若大于10,影响使用数字键字选择
+  switcher:
+    hotkeys:
+      - "Control+grave"
+      - "Control+Shift+grave"
+      #- "F4"
+      - "Control+0"
+      - "Shift+Control+0"
+    abbreviate_options: true
+    caption: "【 可可五笔设置 】"
+    option_list_separator: "｜"
+
+  ascii_composer:
+    good_old_caps_lock: true
+    switch_key:
+      Caps_Lock: commit_code
+      Shift_L: noop		#中英文切换： commit_code 开, noop 关
+      Shift_R: noop		#中英文切换： commit_code 开, noop 关
+      Control_L: noop
+      Control_R: noop
+    inline_ascii: true
+
+
+  key_binder:
+    bindings:
+      - when:   has_menu
+        #accept: semicolon
+        #send:    2 
+      - when:   has_menu
+        #accept: apostrophe
+        #send:    3 
+      - when:   paging
+        accept: minus		#上翻页键： - 号，用单词 minus ；逗号用 comma
+        send:   Page_Up
+      - when:   has_menu
+        accept: equal		#下翻页键： = 号，用单词 equal ；句号用 period
+        send:   Page_Down
+        
+      # 数字小键盘参与编码，注：小键盘的回车可以使候选上屏，主键的回车是编码上屏
+      - when: composing
+        accept: KP_0
+        send: 0
+      - when: composing
+        accept: KP_1
+        send: 1
+      - when: composing
+        accept: KP_2
+        send: 2
+      - when: composing
+        accept: KP_3
+        send: 3
+      - when: composing
+        accept: KP_4
+        send: 4
+      - when: composing
+        accept: KP_5
+        send: 5
+      - when: composing
+        accept: KP_6
+        send: 6
+      - when: composing
+        accept: KP_7
+        send: 7
+      - when: composing
+        accept: KP_8
+        send: 8
+      - when: composing
+        accept: KP_9
+        send: 9
+      - when: composing
+        accept: KP_Decimal
+        send: period
+      - when: has_menu
+        accept: KP_Enter
+        send: Return		# ← 改这里：从“选词”变为“等同于大键盘回车”，space（空格），相当给小键盘回车做了个映射，Return（回车）
+        
+  recognizer:
+    patterns:
+      email: "^[-_.0-9A-Za-z]+@.*$"
+      uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"
+      url: "^(?:www\\.|mailto:|file:|ftp[:./]|localhost)[a-zA-Z0-9_\\-./%&=?#~+@]*$"
+      phrase: "^'" 
+      cmd: "^(help|conf|conv|date|time|week|rmb[0-9%.]+)$"

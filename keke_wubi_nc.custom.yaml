@@ -1,0 +1,62 @@
+patch:
+  "style/color_scheme": klin_nc
+  preset_color_schemes/+:
+  "style/horizontal": true		# 开启横向候选栏 false 关 true 开
+  "style/font_face": "Microsoft YaHei"
+  "style/font_point": 14
+  "style/display_tray_icon": false
+  "style/inline_preedit": false
+  "style/fullscreen": false
+  "style/preedit_type": input
+  # 嵌入首选项内容(字词)。有4个选项可设：input 嵌入输入码 | composition 嵌入编码 | preview 嵌入首选项 | preview_all 嵌入全部内容
+  style/layout/margin_y : 1		#启用后可隐藏候选框(盲打)，建议配合上面的嵌入首选项，一起使用 -1为隐藏候选框
+  style/inline_preedit: true	# 嵌入编码模式，默认是true开启，若想关闭，取消注释即可（删除前面的#号）
+  style/layout:
+    max_width: 800				# 候选框最大宽度（像素），可根据屏幕大小调整，比如设为500或600
+    min_width: 200				# 候选框最小宽度，避免太短时很难看
+    border_width: 2				# 边框粗细
+    margin_x: 8					# 左右内边距
+    margin_y: 10				# 上下内边距
+    candidate_spacing: 2		# 候选词之间的间距
+  # ===== 配色方案定义 =====
+  # ↓↓↓ 新增：定义你的配色方案 ↓↓↓
+  # weasel.yaml
+  preset_color_schemes:
+    nord:                                     # 在 `style/color_schema` 指定的配色方案值
+      name: klin                       # 方案设置中显示的配色名称
+      author: klin                           # 配色作者名称
+  #    color_format: rgba                       # 颜色格式：argb（0xaarrggbb）；rgba（0xrrggbbaa）；abgr（0xaabbggrr 默认）
+      # 默认配色
+
+    # --- 全局/候选框背景样式 ---
+    back_color: 0x000000         # 候选框整体背景颜色（此处为纯黑）
+    shadow_color: 0x000000       # 候选框外部阴影颜色
+    border_color: 0x160042FF     # 候选框边框颜色（此处为带透明度的蓝色系）
+    shadow_color: 0x000000       # ⚠️ 注意：此处重复定义了阴影颜色，会覆盖上一行，建议保留一个即可
+
+# --- 顶部输入框（正在输入的字母）样式 ---
+    text_color: 0xFFFFFF         # 输入框内普通文字颜色（白色）
+    hilited_text_color: 0xFFFFFF # 输入框内高亮（已确认的编码）文字颜色（白色）
+    hilited_back_color: 0x000000 # 输入框内高亮部分的背景颜色（黑色）
+    hilited_shadow_color: 0x00000000 # 输入框高亮部分的阴影颜色（00为全透明）
+    hilited_mark_color: 0xFFC80D # 高亮标记颜色（通常用于指示光标或特定标记，金黄色）
+
+# --- 高亮选中的候选词（第一个词）样式 ---
+    hilited_candidate_label_color: 0x80ff80    # 选中词的序号标签颜色（浅绿色，如 1. 2.）
+    hilited_candidate_text_color: 0x80FF80     # 选中词的文字颜色（浅绿色）
+    hilited_comment_text_color: 0x5C1FFF       # 选中词的注释/编码提示颜色（紫蓝色）
+    hilited_candidate_back_color: 0x000000     # 选中词的背景颜色（黑色）
+    hilited_candidate_border_color: 0x00000000 # 选中词的边框颜色（全透明）
+    hilited_candidate_shadow_color: 0x00000000 # 选中词的阴影颜色（全透明）
+
+# --- 未选中的候选词（翻页后的其他词）样式 ---
+    label_color: 0x00FFFF        # 未选中词的序号标签颜色（青色）
+    candidate_text_color: 0x00FFFF # 未选中词的文字颜色（青色）
+    comment_text_color: 0x7947FF # 未选中词的注释/编码提示颜色（紫色）
+    candidate_back_color: 0x000000     # 未选中词的背景颜色（黑色）
+    candidate_border_color: 0x00000000 # 未选中词的边框颜色（全透明）
+    candidate_shadow_color: 0x00000000 # 未选中词的阴影颜色（全透明）
+
+# --- 翻页按钮样式 ---
+    prevpage_color: 0x80ff80     # 上一页按钮颜色（浅绿色）
+    nextpage_color: 0x80ff80     # 下一页按钮颜色（浅绿色）

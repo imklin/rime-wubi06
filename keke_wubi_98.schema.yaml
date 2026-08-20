@@ -1,0 +1,77 @@
+schema:
+  schema_id: "keke_wubi_98"
+  name: "可可五笔 - 98版"
+  version: "1.0"
+  icon: "img/zh.ico"
+  ascii_icon: "img/en.ico"
+  half_icon: "img/ban.ico"
+  full_icon: "img/quan.ico"
+  author:
+    - 苏轲 <iSuke@msn.com>
+  description: |
+    可可五笔<https://keke.kim/>移植
+
+engine:
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - table_translator
+    - lua_translator@*keke_wubi_command_translator
+    - lua_translator@*keke_wubi_fuzzy_z
+
+  filters:
+    - lua_filter@*keke_wubi_charset_filter	#通用规范汉字表8105字脚本
+    - lua_filter@*keke_wubi_length_filter	#第几码开始在候选框里提示后续编码的脚本
+#     以下两项设置，是对“单字”的处理，需要相应功能就把最前面的 # 去掉，重新部署。注：存在覆盖，应该二选一，不要都用！
+#    - lua_filter@*keke_wubi_char_prior     #候选框里“单字在前”
+#    - lua_filter@*keke_wubi_char_only      #候选框里“只显示单字”，此功能会把“单字在前覆盖”，慎选！
+
+translator:
+  dictionary: keke_wubi_98_common
+  enable_charset_filter: true
+  enable_user_dict: false
+  enable_sentence: false			#整句输入
+  enable_completion: true			#候选框编码提示的“总开关”，手机上建议为 true
+
+speller:
+  alphabet: "abcdefghijklmnopqrstuvwxyz"
+  initials: "abcdefghijklmnopqrstuvwxyz"
+  auto_select: false						#唯一时上屏，如果喜欢打词，慎改此项
+  max_length: 4
+  min_code_length_for_completion: 3			#此处设置第几码开始在候选框里提示后续编码，手机上建议为 1
+
+switches:
+  - name: extended_charset
+    states: [ 常用字词, 支持生僻字 ]
+  - name: full_shape
+    states: [ 半角符号, 全角符号 ]
+  - name: ascii_punct
+    states: [ 中文标点, 英文标点 ]
+  - name: fuzzy_z
+    reset: 0
+    states: [ 禁用万能Z, 开启万能Z ]
+
+punctuator:
+  import_preset: default
+  ascii_punct:
+    hotkey: "Control+period"
+
+key_binder:
+  import_preset: default
+
+recognizer:
+  import_preset: default

@@ -1,0 +1,111 @@
+schema:
+  schema_id: "keke_wubi_nc"
+  name: "可可五笔 - 新世纪版"
+  version: "1.0"
+  icon: "img/zh.ico"
+  ascii_icon: "img/en.ico"
+  half_icon: "img/ban.ico"
+  full_icon: "img/quan.ico"
+  author:
+    - 苏轲 <iSuke@msn.com>
+  description: |
+    可可五笔<https://keke.kim/>移植
+
+engine:
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - table_translator
+    - lua_translator@*keke_wubi_command_translator	# 人民币大写 rmb23156 功能
+    - lua_translator@*keke_wubi_fuzzy_z				# 万能 Z 功能
+    - script_translator@reverse_lookup				# z 键拼音反查通道
+  
+  filters:
+    - reverse_lookup_filter@wubi_reverse_lookup		# 反查挂载
+    - lua_filter@*keke_wubi_charset_filter	#通用规范汉字表8105字脚本
+    - lua_filter@*keke_wubi_length_filter	#第几码开始在候选框里提示后续编码的脚本
+    - simplifier@emoji_suggestion	#候选词后自动联想表情
+#     以下两项设置，是对“单字”的处理，需要相应功能就把最前面的 # 去掉，重新部署。注：存在覆盖，应该二选一，不要都用！
+#    - lua_filter@*keke_wubi_char_prior     #候选框里“单字在前”
+#    - lua_filter@*keke_wubi_char_only      #候选框里“只显示单字”，此功能会把“单字在前覆盖”，慎选！
+
+translator:
+  dictionary: keke_wubi_nc_common
+  enable_charset_filter: true
+  enable_user_dict: false		#开启后：你打的词会自动记频、常用词自动顶前
+  enable_sentence: false		#整句输入
+  enable_completion: true		#候选框编码提示的“总开关”，手机上建议为 true
+
+speller:
+  alphabet: "abcdefghijklmnopqrstuvwxyz"
+  initials: "abcdefghijklmnopqrstuvwxyz"
+  auto_select: true						#唯一时上屏，如果喜欢打词，慎改此项
+  max_length: 4
+  min_code_length_for_completion: 1			#此处设置第几码开始在候选框里提示后续编码，手机上建议为 1（我测试后，如果不用1,就不能用自动顶屏，会乱，不知道为什么，但就是这样。）
+
+switches:
+  - name: extended_charset
+    states: [ 常用字词, 支持生僻字 ]
+  - name: full_shape
+    states: [ 半角符号, 全角符号 ]
+  - name: ascii_punct
+    states: [ 中文标点, 英文标点 ]
+  - name: fuzzy_z
+    reset: 0
+    states: [ 禁用万能Z, 开启万能Z ]
+  - name: emoji_suggestion
+    reset: 1
+    states: [ "🈚️️", "🈶️️" ]
+emoji_suggestion:
+  opencc_config: emoji.json
+  option_name: emoji_suggestion
+  tips: all
+
+punctuator:
+  import_preset: default
+  ascii_punct:
+    hotkey: "Control+period"
+
+key_binder:
+  import_preset: default
+
+# ===== z 键拼音反查五笔核心配置 =====
+recognizer:
+  import_preset: default                           # 保留系统默认识别规则
+  patterns:
+    reverse_lookup: "z[a-z]*$"                     # 匹配 z 开头的反查
+
+reverse_lookup:
+  tag: reverse_lookup
+  dictionary: keke_wubi_global_pinyin
+  prefix: "z"
+  tips: "〔拼音反查五笔〕"
+  extra_tags:
+    - wubi_reverse_lookup
+
+wubi_reverse_lookup:
+  tags: [ reverse_lookup ]
+  dictionary: keke_wubi_nc_common                  # 检索主词库 keke_wubi_nc_common
+  enable_completion: true                          # 强制反查提示补全至最长全码
+  overwrite_comment: true                          # 覆盖原注释
+  comment_format:
+    - xform/ [a-z]*//                               # 擦除拼音回显
+    - xform/~//                                     # 去除波浪号，还原完整补全字母
+    - xform/^z.*//                                  # 无编码时留空
+    - xform/^([a-z]+)$/($1)/                        # 保留纯五笔编码并加括号，如果想换提示的括号只要修改最后($1)，两边的括号就行了。如想换成方括号 [abcd]，**/[$1]/；如 〔五笔:abcd〕，**/〔五笔:$1〕/
+                           # 无编码时留空
+    - xform/^([a-z]+)$/($1)/                        # 保留纯五笔编码并加括号                 # 保留纯五笔编码并加括号

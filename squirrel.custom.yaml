@@ -1,0 +1,44 @@
+# 默认启用 Knight 可可五笔 皮肤，追加到系统配色，不影响系统自带的配色方案
+patch:
+  style:
+    # 设置候选字大小（单位：点）：
+    font_point: 18
+    # 编码串字号（可选，不指定则跟随 font_point）：
+    label_font_point: 16
+    # 注释字号（可选，不指定则跟随 font_point）：
+    comment_font_point: 16
+    border_width: 16
+    border_height: 10
+    corner_radius: 10
+    layout:
+      min_width: 480
+      
+  style/color_scheme: KeKe
+
+  preset_color_schemes/+:
+    KeKe:
+      name: 可可五笔默认
+      author: 苏轲
+      candidate_format: "%c. %@        "
+      back_color: 0x000000
+      border_color: 0x160042FF
+      shadow_color: 0x000000
+      text_color: 0xFFFFFF
+      hilited_text_color: 0xFFFFFF
+      hilited_back_color: 0x000000
+      hilited_shadow_color: 0x00000000
+      hilited_mark_color: 0xFFC80D
+      hilited_candidate_label_color: 0x80ff80
+      hilited_candidate_text_color: 0x80FF80
+      hilited_comment_text_color: 0x5C1FFF
+      hilited_candidate_back_color: 0x000000
+      hilited_candidate_border_color: 0x00000000
+      hilited_candidate_shadow_color: 0x00000000
+      label_color: 0x00FFFF
+      candidate_text_color: 0x00FFFF
+      comment_text_color: 0x7947FF
+      candidate_back_color: 0x000000
+      candidate_border_color: 0x00000000
+      candidate_shadow_color: 0x00000000
+      prevpage_color: 0x80ff80
+      nextpage_color: 0x80ff80
