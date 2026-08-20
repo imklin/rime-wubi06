@@ -32,7 +32,7 @@ echo.
 :: ==================================================================
 
 :: 下载源：主用GitHub，可可五笔备用官网（文件内容完全一致）
-set "ZIP_GITHUB=https://github.com/imklin/Rime-Wubi/archive/refs/heads/main.zip"
+set "ZIP_GITHUB=https://github.com/imklin/rime-wubi06.git/archive/.zip"
 
 set "ZIP_OFFICIAL=＊"
 
@@ -121,6 +121,7 @@ echo ==============================================
 echo.
 pause
 start "" "%RIMENEW%"
+#https://github.com/imklin/Rime-Wubi/archive/refs/heads/main.zip
 #https://github.com/KeKeWubi/Rime-KeKeWubi/archive/refs/heads/main.zip
 #https://keke.kim/DownLoad/Rime-KeKeWubi-main.zip
 exitexit
