@@ -1,9 +1,9 @@
 @echo off
 chcp 65001 >nul
-title 可可五笔 Rime - Windows全自动更新工具
+title  Rime-wubi06 - Windows全自动更新工具
 echo ==============================================
 echo.
-echo        可可五笔 Rime - Windows全自动更新工具
+echo        Rime-wubi06 - Windows全自动更新工具
 echo.
 echo ==============================================
 echo.
