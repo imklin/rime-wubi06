@@ -92,7 +92,7 @@ echo.
 
 echo 4. 在系统缓存目录解压压缩包
 powershell Expand-Archive -Path "%ZIP_TEMP%" -DestinationPath "%TMP_DIR%" -Force
-if not exist "%TMP_DIR%\Rime-Wubi-main" (
+if not exist "%TMP_DIR%\Rime-Wubi06" (
     echo 错误：压缩包损坏，解压失败
     del "%ZIP_TEMP%"
     rmdir /s /q "%TMP_DIR%" 2>nul
@@ -101,7 +101,7 @@ if not exist "%TMP_DIR%\Rime-Wubi-main" (
 )
 
 echo 5. 将仓库内所有文件直接复制到Rime根目录
-xcopy "%TMP_DIR%\Rime-Wubi-main\*" "%RIMENEW%\" /e /h /y
+xcopy "%TMP_DIR%\Rime-Wubi06\*" "%RIMENEW%\" /e /h /y
 
 echo 6. 清理系统全部临时文件
 rmdir /s /q "%TMP_DIR%"
@@ -113,14 +113,14 @@ echo 可可五笔配置文件已拷贝到目录：%appdata%\Rime
 echo.
 echo 接下来，按任意键会打开此目录。
 echo.
-echo 如果你改过Rime默认用户目录，手动把全部文件复制到你自定义文件夹；
+echo 如果你改过默认用户目录，手动把全部文件复制到你自定义文件夹；
 echo.
 echo 未修改目录则直接右键小狼毫托盘图标 → 重新部署 生效方案
 echo.
 echo ==============================================
 echo.
 pause
-start "" "%RIMENEW%"
+start "" "%NEW%"
 #https://github.com/imklin/Rime-Wubi/archive/refs/heads/main.zip
 #https://github.com/KeKeWubi/Rime-KeKeWubi/archive/refs/heads/main.zip
 #https://keke.kim/DownLoad/Rime-KeKeWubi-main.zip
