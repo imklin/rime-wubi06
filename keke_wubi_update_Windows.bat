@@ -10,8 +10,8 @@ echo.
 
 :: 路径配置：全部临时文件移至系统缓存，不在Rime文件夹内
 set "RIMENEW=%APPDATA%\Rime"
-set "ZIP_TEMP=%temp%\Wubi.zip"
-set "TMP_DIR=%temp%\tmp_keke"
+set "ZIP_TEMP=%temp%\Wubi06.zip"
+set "TMP_DIR=%temp%\tmp_wubi06"
 set "UA=Chrome/120.0.0.0 Windows/10.0"
 
 :: ====================== 词库备份确认逻辑 ======================
@@ -92,7 +92,7 @@ echo.
 
 echo 4. 在系统缓存目录解压压缩包
 powershell Expand-Archive -Path "%ZIP_TEMP%" -DestinationPath "%TMP_DIR%" -Force
-if not exist "%TMP_DIR%\Rime-Wubi06" (
+if not exist "%TMP_DIR%\Rime-Wubi06-main" (
     echo 错误：压缩包损坏，解压失败
     del "%ZIP_TEMP%"
     rmdir /s /q "%TMP_DIR%" 2>nul
@@ -101,7 +101,7 @@ if not exist "%TMP_DIR%\Rime-Wubi06" (
 )
 
 echo 5. 将仓库内所有文件直接复制到Rime根目录
-xcopy "%TMP_DIR%\Rime-Wubi06\*" "%RIMENEW%\" /e /h /y
+xcopy "%TMP_DIR%\Rime-Wubi06-main6\*" "%RIMENEW%\" /e /h /y
 
 echo 6. 清理系统全部临时文件
 rmdir /s /q "%TMP_DIR%"
