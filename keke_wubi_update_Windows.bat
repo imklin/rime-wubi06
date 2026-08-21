@@ -101,7 +101,7 @@ if not exist "%TMP_DIR%\Rime-Wubi06-main" (
 )
 
 echo 5. 将仓库内所有文件直接复制到Rime根目录
-xcopy "%TMP_DIR%\Rime-Wubi06-main6\*" "%RIMENEW%\" /e /h /y
+xcopy "%TMP_DIR%\Rime-Wubi06-main\*" "%RIMENEW%\" /e /h /y
 
 echo 6. 清理系统全部临时文件
 rmdir /s /q "%TMP_DIR%"
